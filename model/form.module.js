@@ -29,7 +29,7 @@ const developerSchema = mongoose.Schema(
     firstName: String,
     lastName: String,
     phoneNumber: String,
-    skills: [String], // References to skills
+    // skills: [], // References to skills
     professionalExperience: [professionalExperienceSchema],
     educationExperience: [educationExperienceSchema],
   },
