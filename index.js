@@ -4,6 +4,7 @@ const { connection } = require("./db.js");
 const app = express();
 const cors = require("cors");
 const DeveloperRouter = require("./route/form.route.js");
+const { AuthRouter } = require("./route/auth.route.js");
 app.use(express.json());
 app.use(cors({ origin: "*" }));
 
@@ -12,6 +13,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/form", DeveloperRouter);
+app.use("/users", AuthRouter);
 
 app.listen(process.env.port, async () => {
   try {

@@ -29,7 +29,6 @@ const developerSchema = mongoose.Schema(
     firstName: String,
     lastName: String,
     phoneNumber: Number,
-    // skills: [], // References to skills
     professionalExperience: [professionalExperienceSchema],
     educationExperience: [educationExperienceSchema],
   },
