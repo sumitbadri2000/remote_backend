@@ -9,7 +9,7 @@ const AuthRouter = express.Router();
 AuthRouter.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
 
-  const user = await UserModel.find({ email });
+  const user = await AuthModel.find({ email });
 
   if (user.length === 0) {
     bcrypt.hash(password, 5, async (err, hash) => {
@@ -17,7 +17,7 @@ AuthRouter.post("/register", async (req, res) => {
         res.status(400).send({ msg: "Something Went Wrong" });
       } else {
         try {
-          const newUser = new UserModel({
+          const newUser = new AuthModel({
             name,
 
             email,
@@ -38,7 +38,7 @@ AuthRouter.post("/register", async (req, res) => {
 AuthRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await UserModel.find({ email });
+  const user = await AuthModel.find({ email });
 
   if (user.length > 0) {
     bcrypt.compare(password, user[0].password, async (err, result) => {
