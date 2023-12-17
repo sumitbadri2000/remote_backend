@@ -21,25 +21,25 @@ DeveloperRouter.get("/", async (req, res) => {
 DeveloperRouter.post("/add", async (req, res) => {
   try {
     //   const ques = new CategoryModel(req.body);
-    const {
-      firstName,
-      lastName,
-      phoneNumber,
-      email,
-      skills,
-      professionalExperience,
-      educationExperience,
-    } = req.body;
+    const formData = req.body;
 
     // Create a new instance of the DeveloperModel
     const newDeveloper = new DeveloperModel({
-      firstName,
-      lastName,
-      phoneNumber,
-      email,
-      skills,
-      professionalExperience,
-      educationExperience,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phoneNumber: formData.phoneNumber,
+      email: formData.email, // Add email field to your form
+      professionalExperience: formData.professionalExperiences.map((exp) => ({
+        companyName: exp.companyName,
+        techStack: exp.techStack,
+        skillsUsed: exp.skillsUsed,
+        timePeriod: exp.timePeriod,
+      })),
+      educationExperience: formData.educationExperiences.map((edu) => ({
+        degreeName: edu.degreeName,
+        schoolName: edu.schoolName,
+        timePeriod: edu.timePeriod,
+      })),
     });
 
     // Save the new developer to the database
